@@ -1,0 +1,18 @@
+# Java: Ignore compiled files
+*.class
+
+# C++: Ignore executables and object files
+*.exe
+*.o
+*.out
+
+# Node.js: Ignore heavy dependency folders
+node_modules/
+npm-debug.log*
+
+# Python: Ignore cache
+__pycache__/
+
+# OS specific
+.DS_Store
+Thumbs.db
