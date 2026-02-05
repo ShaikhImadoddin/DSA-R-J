@@ -50,7 +50,7 @@ public class MsPatternPrinting {
     }
 
     public static void printAlphabetTriangle(int row,int col){
-        
+
     }
 
     public static void main(String[] args) {
@@ -70,5 +70,7 @@ public class MsPatternPrinting {
         System.out.println();
         printAlphabetTriangle(row,col);
         System.out.println();
+
+        sc.close();
     }
 }
