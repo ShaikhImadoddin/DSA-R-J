@@ -136,40 +136,46 @@ public class L2PatternPrinting {
         }
     }
 
-    public static void zigZagPattern(int row,int col){
-        // upper part
-        for(int i=0;i<=row;i++){
-            // for spaces
-            for(int j=0;j<i;j++){
-                System.out.print(" ");
-            }
-
-            // for stars
-            for(int j=0;j<(2*(row-i)+1);j++){
-                if(j==0 || j==(2*(row-i)))
-                    System.out.print("*");
-                else
-                    System.out.print(" ");
-            }
-            System.out.println();
+    public static void zigZagPattern(int row, int col) {
+    // Upper part (Inverted V shape)
+    // 'row' acts as 'n' (the distance from the edge to the center)
+    for (int i = 0; i <= row; i++) {
+        // 1. Leading spaces
+        for (int j = 0; j < i; j++) {
+            System.out.print(" ");
         }
 
-        // lower part
-        for(int i=0;i<row;i++){
-            // for spaces
-            for(int j=0;j<row-i-1;j++){
+        // 2. Stars at boundaries
+        int width = 2 * (row - i) + 1;
+        for (int j = 0; j < width; j++) {
+            if (j == 0 || j == width - 1) {
+                System.out.print("*");
+            } else {
                 System.out.print(" ");
             }
-            // for stars
-            for(int j=0;j<(2*i)+row;j++){
-                if(j==0 || j==(((2*i)+row)-1))
-                    System.out.print("*");
-                else
-                    System.out.print(" ");
-            }
-            System.out.println();
         }
+        System.out.println();
     }
+
+    // Lower part (V shape)
+    for (int i = 1; i <= row; i++) {
+        // 1. Leading spaces (decreasing)
+        for (int j = 0; j < row - i; j++) {
+            System.out.print(" ");
+        }
+
+        // 2. Stars at boundaries (expanding)
+        int width = 2 * i + 1;
+        for (int j = 0; j < width; j++) {
+            if (j == 0 || j == width - 1) {
+                System.out.print("*");
+            } else {
+                System.out.print(" ");
+            }
+        }
+        System.out.println();
+    }
+}
 
 
     public static void main(String[] args){

@@ -50,7 +50,13 @@ public class MsPatternPrinting {
     }
 
     public static void printAlphabetTriangle(int row,int col){
-
+        for(int i=0;i<row;i++){
+            char ch = 'A';
+            for(int j=0;j<=i;j++){
+                System.out.print(ch++);
+            }
+            System.out.println();
+        }
     }
 
     public static void printSymmetricAlphabetPyramid(int row, int col){
