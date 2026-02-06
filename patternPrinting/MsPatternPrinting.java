@@ -53,6 +53,39 @@ public class MsPatternPrinting {
 
     }
 
+    public static void printSymmetricAlphabetPyramid(int row, int col){
+        char fch = 'A';
+        char sch = 'A';
+        for(int i=0;i<row;i++){
+            // for spaces
+            for(int j=0;j<(row-i)-1;j++){
+                System.out.print(" ");
+            }
+            // for first part
+            fch = 'A';
+            for(int j=0;j<=i;j++){
+                System.out.print(fch++);
+            }
+            // for reverse part
+            sch = (char) (65+i-1);
+            for(int j=0;j<i;j++){
+                System.out.print(sch--);
+            }
+            System.out.println();
+        }  
+    }
+
+    public static void printReverseAlphabetRightTrianglePattern(int row,int col){
+        char ch = 'A';
+        for(int i=0;i<row;i++){
+            ch = (char) ('A' + (row - 1) - i);
+            for(int j=0;j<=i;j++){
+                System.out.print(ch++);
+            }
+            System.out.println();
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -70,7 +103,9 @@ public class MsPatternPrinting {
         System.out.println();
         printAlphabetTriangle(row,col);
         System.out.println();
-
+        printSymmetricAlphabetPyramid(row,col);
+        System.out.println();
+        printReverseAlphabetRightTrianglePattern(row,col);
         sc.close();
     }
 }
