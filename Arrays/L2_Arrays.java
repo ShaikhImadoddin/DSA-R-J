@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.List;
+// import java.util.HashSet;
 
 public class L2_Arrays {
     public static ArrayList<Integer> reverseArray(final List<Integer> arr){
@@ -114,6 +115,47 @@ public class L2_Arrays {
         return pairIndex;
     }
 
+    public static ArrayList<ArrayList<Integer>> threeSum(ArrayList<Integer> nums){
+        // soting nums
+        Collections.sort(nums);
+
+        // declaring 2d arraylist
+        ArrayList<ArrayList<Integer>> matrix = new ArrayList<>();
+
+        // set for unique pairs
+        // HashSet<ArrayList<Integer>> set = new HashSet<>();
+
+        for(int i=0;i<nums.size();i++){
+            // condition to check previous element of i
+            if(i>0 && nums.get(i).equals(nums.get(i-1))){
+                continue;
+            }
+            for(int j=i+1;j<nums.size();j++){
+                // condition to check previous element of j
+                if(j>i+1 && nums.get(j).equals(nums.get(j-1))){
+                    continue;
+                }
+                for(int k=j+1;k<nums.size();k++){
+                    // condition to check previous element of i
+                    if(k>j+1 && nums.get(k).equals(nums.get(k-1))){
+                        continue;
+                    }
+                    ArrayList<Integer> sums = new ArrayList<>();
+                    if((nums.get(i) + nums.get(j) + nums.get(k)) == 0){
+                        sums.add(nums.get(i));
+                        sums.add(nums.get(j));
+                        sums.add(nums.get(k));
+                        matrix.add(sums);
+                        // set.add(sums);
+                    }
+                }
+            }
+        }
+        // 2. IMPORTANT: Pass the set into the ArrayList constructor to "fill" the matrix
+        // ArrayList<ArrayList<Integer>> matrix = new ArrayList<>(set);
+        return matrix;
+    } 
+
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
 
@@ -169,11 +211,17 @@ public class L2_Arrays {
 
         // Two sum
 
-        ArrayList<Integer> nums = new ArrayList<>(List.of(2,7,11,15));
-        int target = 9;
-        ArrayList<Integer> ans = twoSum(nums, target);
-        System.out.println(ans);
+        // ArrayList<Integer> nums = new ArrayList<>(List.of(2,7,11,15));
+        // int target = 9;
+        // ArrayList<Integer> ans = twoSum(nums, target);
+        // System.out.println(ans);
 
+
+        // Three sum
+
+        ArrayList<Integer> nums = new ArrayList<>(List.of(-1, 0, 1, 2, -1, -4));
+        ArrayList<ArrayList<Integer>> ans = threeSum(nums);
+        System.out.println(ans);
 
         sc.close();
     }
