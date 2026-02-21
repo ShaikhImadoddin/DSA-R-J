@@ -93,6 +93,86 @@ public class Ms_Arrays {
         // If the loop completes, the array is sorted
         return -1;
     }
+
+    public static int findMode(int[] arr) {
+        // size of array
+        int n = arr.length;
+
+        if(n==0) return 0;
+        // sort 
+        Arrays.sort(arr);
+
+        // declaring variable mode which means least number repeated most times
+        int mode = arr[0];
+
+        // count frequencies
+        int currentFrequency = 1;
+        int maxFrequency = 1;
+
+        // main logic
+        for(int i=1;i<n;i++){
+            // if current element is equal to previous element increase curr freq then compare with max freq 
+            if(arr[i-1] == arr[i]){
+                currentFrequency++;
+                if(currentFrequency > maxFrequency){
+                    maxFrequency = currentFrequency;
+                    mode = arr[i];
+                }
+            }
+            else{
+                currentFrequency = 1;
+            }
+        }
+        // return element
+        return mode;
+    }
+
+    public static int[] highestAndLowestFrequency(int[] arr){
+        // size of array
+        int n = arr.length;
+
+        if (n == 0) return new int[]{0, 0};
+
+        int[] ans = new int[2];
+
+        // 1. Get the High Frequency (Mode)
+        ans[0] = findMode(arr);
+
+        // 2. Prepare for Low Frequency
+        Arrays.sort(arr);
+        int mode = arr[0];
+        int currentFrequency = 1;
+    
+        // Start with a large number so the first group always becomes the new min
+        int minFrequency = Integer.MAX_VALUE; 
+
+        // Main logic for Lowest Frequency
+        for (int i = 1; i < n; i++) {
+            if (arr[i] == arr[i - 1]) {
+                currentFrequency++;
+            } else {
+                // A streak just ended! Compare the finished streak
+                if (currentFrequency < minFrequency) {
+                    minFrequency = currentFrequency;
+                    mode = arr[i - 1]; // The number that just finished its streak
+                }
+                // Reset for the new number
+                currentFrequency = 1;
+            }
+        }
+
+        // FINAL CHECK: Handle the very last group after the loop finishes
+        if (currentFrequency < minFrequency) {
+            minFrequency = currentFrequency;
+            mode = arr[n - 1];
+        }
+
+        ans[1] = mode;
+
+        return ans;  
+    }
+
+
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
 
@@ -176,15 +256,71 @@ public class Ms_Arrays {
         Try to identify this pattern and apply the logic to solve the problem for any given input array.
         */
 
-        ArrayList<Integer> arr = new ArrayList<>();
-        System.out.println("Enter non integer value to stop: ");
+        // ArrayList<Integer> arr = new ArrayList<>();
+        // System.out.println("Enter non integer value to stop: ");
 
-        while(sc.hasNextInt()){
-            arr.add(sc.nextInt());
+        // while(sc.hasNextInt()){
+        //     arr.add(sc.nextInt());
+        // }
+        // int ans = findFirstUnsortedIndex(arr);
+        // System.out.println(ans);
+
+        // Find the Mode of the Array
+
+        /*
+        Given an array of integers, determine the mode of the array. The mode is the element that appears most frequently in the array. If there is more than one element with the highest frequency of appearances, return the smallest of these elements.
+
+        Example
+        Example 1:
+        Input: [3, 3, 2, 1, 5, 1]
+        Output: 1
+        Explanation: The numbers 3 and 1 both appear twice, but 1 is smaller than 3, so 1 is the mode.
+        */
+
+        // System.out.println("Enter the size of Array : ");
+        // int n = sc.nextInt();
+
+        // int[] arr = new int[n];
+
+        // for(int i=0;i<n;i++){
+        //     System.out.printf("Enter element at arr[%d]: ",i);
+        //     arr[i] = sc.nextInt();
+        // }
+            
+        
+        // int ans = findMode(arr);
+        // System.out.println("Mode Element is: " + ans);
+
+        // Identify Elements with Highest and Lowest Frequency Separately
+
+        /*
+        Problem Description
+        You are given an array of integers. Your task is to identify two elements: the one that appears with the highest frequency and the one that appears with the lowest frequency in the array. In the event that multiple elements share the same highest or lowest frequency, select the smallest element among those.
+
+        Example:
+        Input:
+
+        [4, 4, 1, 2, 2, 2, 3, 3, 3, 3]
+
+        Output:
+        Highest Frequency Element: 3
+        Lowest Frequency Element: 1
+        */
+        System.out.println("Enter the size of Array : ");
+        int n = sc.nextInt();
+
+        int[] arr = new int[n];
+
+        for(int i=0;i<n;i++){
+            System.out.printf("Enter element at arr[%d]: ",i);
+            arr[i] = sc.nextInt();
         }
-        int ans = findFirstUnsortedIndex(arr);
-        System.out.println(ans);
-
+            
+        
+        int[] ans = highestAndLowestFrequency(arr);
+        // System.out.println("Mode Element is: " + ans);
+        for(int a : ans)
+            System.out.println(a);
 
         sc.close();
     }
