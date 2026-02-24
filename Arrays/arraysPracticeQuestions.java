@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.HashMap;
+import java.util.ArrayList;
 
 public class arraysPracticeQuestions {
     
@@ -12,6 +13,27 @@ public class arraysPracticeQuestions {
             nums[i] = sc.nextInt();
         }   
         return nums; 
+    }
+
+    public static ArrayList<ArrayList<Integer>> takeInputIn2dArray(Scanner sc) {
+        ArrayList<ArrayList<Integer>> matrix = new ArrayList<>();
+
+        System.out.print("Enter number of rows: ");
+        int rows = sc.nextInt();
+        System.out.print("Enter number of columns: ");
+        int cols = sc.nextInt();
+
+        for (int i = 0; i < rows; i++) {
+            // Create a new inner list for each row
+            ArrayList<Integer> row = new ArrayList<>();
+            System.out.printf("Enter %d elements for row %d: ", cols, i);
+            for (int j = 0; j < cols; j++) {
+                row.add(sc.nextInt());
+            }
+            // Add the completed row to our 2D list
+            matrix.add(row);
+        }
+        return matrix;
     }
 
     public static int missingNumber(int[] nums) {
@@ -93,6 +115,43 @@ public class arraysPracticeQuestions {
         // The head of the queue is now your kth most frequent element
         return pq.poll();
     }
+
+    public static ArrayList<Integer> rowSum(ArrayList<ArrayList<Integer>> matrix){
+        int row = matrix.size();
+        
+        ArrayList<Integer> rowSumArray = new ArrayList<>();
+        // outer loop for row
+        for(int i=0;i<row;i++){
+            int sum = 0;
+            int col =  matrix.get(i).size();
+            // inner loop for col
+            for(int j=0;j<col;j++){
+                sum += matrix.get(i).get(j);
+            }
+            rowSumArray.add(sum);
+        }
+
+        // return array
+        return rowSumArray;
+    }
+
+    public static ArrayList<Integer> colSum(ArrayList<ArrayList<Integer>> matrix){
+        int rows = matrix.size();
+        int cols = matrix.get(0).size(); // Assuming all rows are same length
+        ArrayList<Integer> colSumList = new ArrayList<>();
+
+        // Outer loop moves through COLUMNS
+        for (int j = 0; j < cols; j++) {
+            int sum = 0;
+            // Inner loop moves through ROWS
+            for (int i = 0; i < rows; i++) {
+                sum += matrix.get(i).get(j);
+            }
+            colSumList.add(sum);
+        }
+
+        return colSumList;
+    }
     
     public static void main(String [] args){
         Scanner sc = new Scanner(System.in);
@@ -156,21 +215,28 @@ Input: array = [5, 6, 5, 7], k = 10
 Output: -1
 There are only 3 unique elements, so the 10th most frequent element doesn't exist.
 */
-    System.out.println("Enter size of array: ");
-    int n = sc.nextInt();
+    // System.out.println("Enter size of array: ");
+    // int n = sc.nextInt();
 
-    // declaring array of size n
-    int[] arr = new int[n];
+    // // declaring array of size n
+    // int[] arr = new int[n];
     
-    // take input in array
-    arr = takeInputInArray(arr, n,sc);
+    // // take input in array
+    // arr = takeInputInArray(arr, n,sc);
 
-    // access kth most frequently occuring element
-    System.out.println("Enter the kth element: ");
-    int k = sc.nextInt();
+    // // access kth most frequently occuring element
+    // System.out.println("Enter the kth element: ");
+    // int k = sc.nextInt();
     
-    int ans = kthMostFrequent(arr, k);
-    System.out.printf("%d^th occuring element is:  %d",k,ans);
+    // int ans = kthMostFrequent(arr, k);
+    // System.out.printf("%d^th occuring element is:  %d",k,ans);
+    
+    // Print the Sum of Each Row in a 2D Array
+
+    ArrayList<ArrayList<Integer>> matrix = new ArrayList<>();
+    matrix = takeInputIn2dArray(sc);
+    System.out.println(rowSum(matrix));
+    System.out.println(colSum(matrix));
 
     sc.close();
     }
