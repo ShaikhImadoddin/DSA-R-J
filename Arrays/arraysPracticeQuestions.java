@@ -152,6 +152,32 @@ public class arraysPracticeQuestions {
 
         return colSumList;
     }
+
+    public static ArrayList<Integer> wavePrintMatrix(ArrayList<ArrayList<Integer>> matrix){
+
+        // Check if the entire matrix is null or has 0 rows
+        if (matrix == null || matrix.isEmpty()) {
+            return new ArrayList<>(); 
+        }
+        
+        int row = matrix.size();
+        int col = matrix.get(0).size();
+
+        ArrayList<Integer> wavePrintArray = new ArrayList<>();
+        // outer loop for col
+        for(int j=0;j<col;j++){
+            // inner loop for row
+            for(int i=0;i<row;i++){
+                if((j%2) == 0){
+                    wavePrintArray.add(matrix.get(i).get(j));
+                }
+                else{
+                    wavePrintArray.add(matrix.get(row-i-1).get(j));
+                }
+            }
+        }
+        return wavePrintArray;
+    }
     
     public static void main(String [] args){
         Scanner sc = new Scanner(System.in);
@@ -233,10 +259,19 @@ There are only 3 unique elements, so the 10th most frequent element doesn't exis
     
     // Print the Sum of Each Row in a 2D Array
 
+    // ArrayList<ArrayList<Integer>> matrix = new ArrayList<>();
+    // matrix = takeInputIn2dArray(sc);
+    // System.out.println(rowSum(matrix));
+
+    // Print the Sum of Each Col in a 2D Array
+
+    // System.out.println(colSum(matrix));
+    
+    // Wave Print A Matrix
     ArrayList<ArrayList<Integer>> matrix = new ArrayList<>();
     matrix = takeInputIn2dArray(sc);
-    System.out.println(rowSum(matrix));
-    System.out.println(colSum(matrix));
+    ArrayList<Integer> ans = wavePrintMatrix(matrix);
+    System.out.println(ans);
 
     sc.close();
     }
