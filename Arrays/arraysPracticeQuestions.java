@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ArrayList;
 
 public class arraysPracticeQuestions {
@@ -178,6 +179,51 @@ public class arraysPracticeQuestions {
         }
         return wavePrintArray;
     }
+
+    public static ArrayList<Integer> spiralPrintMatrix(ArrayList<ArrayList<Integer>> matrix){
+        // Check if the entire matrix is null or has 0 rows
+        if (matrix == null || matrix.isEmpty()) {
+            return new ArrayList<>(); 
+        }
+
+        ArrayList<Integer> result = new ArrayList<>();
+
+        int top = 0, bottom = matrix.size() - 1;
+        int left = 0, right = matrix.get(0).size() - 1;
+
+        while (top <= bottom && left <= right) {
+
+            // top row
+            for(int i=left;i<=right;i++){
+                result.add(matrix.get(top).get(i));
+            }
+            top++;
+
+            // right row
+            for (int i = top; i <= bottom; ++i) {
+                result.add(matrix.get(i).get(right));
+            }
+            right--;
+
+            // bottom row
+            if (top <= bottom) {
+                for (int i = right; i >= left; --i) {
+                    result.add(matrix.get(bottom).get(i));
+                }
+                --bottom;
+            }
+
+            // left row
+            if (left <= right) {
+                for (int i = bottom; i >= top; --i){
+                    result.add(matrix.get(i).get(left));
+                } 
+                ++left;
+            }
+        }
+        return result;
+        
+    }
     
     public static void main(String [] args){
         Scanner sc = new Scanner(System.in);
@@ -267,11 +313,17 @@ There are only 3 unique elements, so the 10th most frequent element doesn't exis
 
     // System.out.println(colSum(matrix));
     
-    // Wave Print A Matrix
+    // Wave print A Matrix
+    // Spiral print A matrix
+
     ArrayList<ArrayList<Integer>> matrix = new ArrayList<>();
     matrix = takeInputIn2dArray(sc);
     ArrayList<Integer> ans = wavePrintMatrix(matrix);
+    ArrayList<Integer> ans2 = spiralPrintMatrix(matrix);
     System.out.println(ans);
+    System.out.println(ans2);
+
+
 
     sc.close();
     }
