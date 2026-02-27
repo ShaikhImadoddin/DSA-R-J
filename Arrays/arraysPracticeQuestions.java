@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.HashMap;
-import java.util.List;
+// import java.util.List;
 import java.util.ArrayList;
 
 public class arraysPracticeQuestions {
@@ -224,6 +224,41 @@ public class arraysPracticeQuestions {
         return result;
         
     }
+
+    public static int pivotIndex(int [] nums){
+        // Array size
+        int n = nums.length;
+
+        // Declaring two arrays in java intialized with zero by default
+        int rightSumArr[] = new int[n];
+        int leftSumArr[] = new int[n];
+
+        // declaring two variables to store sum
+
+        int leftSum = 0;
+        int rightSum = 0;
+
+        // left sum calculation
+        for(int i=1;i<n;i++){
+            leftSum += nums[i-1];
+            leftSumArr[i] += leftSum;
+        }
+
+
+        // right sum calculation
+        for(int i=n-2;i>=0;i--){
+            rightSum += nums[i+1];
+            rightSumArr[i] += rightSum;
+        }
+
+        // check index which is having common value
+        for(int i=0;i<n;i++){
+            if(leftSumArr[i] == rightSumArr[i])
+                return i;
+        }
+
+        return -1;
+    }
     
     public static void main(String [] args){
         Scanner sc = new Scanner(System.in);
@@ -316,14 +351,22 @@ There are only 3 unique elements, so the 10th most frequent element doesn't exis
     // Wave print A Matrix
     // Spiral print A matrix
 
-    ArrayList<ArrayList<Integer>> matrix = new ArrayList<>();
-    matrix = takeInputIn2dArray(sc);
-    ArrayList<Integer> ans = wavePrintMatrix(matrix);
-    ArrayList<Integer> ans2 = spiralPrintMatrix(matrix);
-    System.out.println(ans);
-    System.out.println(ans2);
+    // ArrayList<ArrayList<Integer>> matrix = new ArrayList<>();
+    // matrix = takeInputIn2dArray(sc);
+    // ArrayList<Integer> ans = wavePrintMatrix(matrix);
+    // ArrayList<Integer> ans2 = spiralPrintMatrix(matrix);
+    // System.out.println(ans);
+    // System.out.println(ans2);
 
+    // Find Pivot Index  leetcode 724
 
+    System.out.println("Enter the size of Array: ");
+    int n = sc.nextInt();
+
+    int [] nums = new int [n];
+    nums = takeInputInArray(nums, n, sc);
+    int ans = pivotIndex(nums);
+    System.out.printf("Pivot index is %d",ans);
 
     sc.close();
     }
