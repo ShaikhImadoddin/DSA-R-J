@@ -259,6 +259,36 @@ public class arraysPracticeQuestions {
 
         return -1;
     }
+
+    public static double findMaxAverage(int[] nums,int k){
+        int n = nums.length;
+        int subArraySum = 0;
+        int maxSum = Integer.MIN_VALUE;
+
+        int i=0;
+        int j=k;
+
+        // Calculate the sum of the first window
+        for(int l=0;l<k;l++){
+            subArraySum += nums[l];
+        }
+
+        if(subArraySum > maxSum){
+                maxSum = subArraySum;
+        }
+    
+        // Slide the window across the rest of the array
+        while(j<n){
+            subArraySum -= nums[i++];
+            subArraySum += nums[j++];
+    
+            if(subArraySum > maxSum)
+                maxSum = subArraySum;
+        }
+
+        // Cast to double before division to ensure a floating-point result
+        return (maxSum/(double)k);
+    }
     
     public static void main(String [] args){
         Scanner sc = new Scanner(System.in);
@@ -360,13 +390,27 @@ There are only 3 unique elements, so the 10th most frequent element doesn't exis
 
     // Find Pivot Index  leetcode 724
 
-    System.out.println("Enter the size of Array: ");
-    int n = sc.nextInt();
+    // System.out.println("Enter the size of Array: ");
+    // int n = sc.nextInt();
 
-    int [] nums = new int [n];
+    // int [] nums = new int [n];
+    // nums = takeInputInArray(nums, n, sc);
+    // int ans = pivotIndex(nums);
+    // System.out.printf("Pivot index is %d",ans);
+
+    // Maximum Average Subarray
+
+    System.out.println("Enter the size of array: ");
+    int n = sc.nextInt();
+    
+    int [] nums = new int[n];
     nums = takeInputInArray(nums, n, sc);
-    int ans = pivotIndex(nums);
-    System.out.printf("Pivot index is %d",ans);
+
+    System.out.println("Enter the size of subArray: ");
+    int k = sc.nextInt();
+
+    double ans = findMaxAverage(nums, k);
+    System.out.println(ans);
 
     sc.close();
     }
