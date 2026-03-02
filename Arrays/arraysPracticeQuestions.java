@@ -5,6 +5,7 @@ import java.util.PriorityQueue;
 import java.util.HashMap;
 // import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class arraysPracticeQuestions {
     
@@ -289,6 +290,58 @@ public class arraysPracticeQuestions {
         // Cast to double before division to ensure a floating-point result
         return (maxSum/(double)k);
     }
+
+    public static int findDuplicate(int [] nums){
+        int n = nums.length;
+        int[] numsCopy = new int[n];
+        numsCopy = nums;
+
+        
+        // sorting method
+
+            // Arrays.sort(numsCopy);
+
+            // for(int i=0;i<n-1;i++){
+            //     if(numsCopy[i] == numsCopy[i+1])
+            //         return numsCopy[i];
+            // }
+
+            // return 0;
+
+        // visied negative marking method
+            
+            // int ans = -1;
+            // for(int i=0;i<nums.length;i++){
+            //     int index = Math.abs(nums[i]);
+
+            //     // already visted 
+            //     if(nums[index] < 0)
+            //         return index;
+
+            //     // visited mark
+            //     nums[index] *= -1;
+            // }
+            
+            // return ans;
+            
+        // swapping method
+
+        // Standard Cycle Sort logic
+
+            while (nums[0] != nums[nums[0]]) {
+                // We pass the array and the two positions to swap
+                swap(nums, 0, nums[0]);
+            }
+
+            return nums[0];
+    }
+
+    // Helper method to handle the swapping logic
+    public static void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
     
     public static void main(String [] args){
         Scanner sc = new Scanner(System.in);
@@ -400,16 +453,27 @@ There are only 3 unique elements, so the 10th most frequent element doesn't exis
 
     // Maximum Average Subarray
 
+    // System.out.println("Enter the size of array: ");
+    // int n = sc.nextInt();
+    
+    // int [] nums = new int[n];
+    // nums = takeInputInArray(nums, n, sc);
+
+    // System.out.println("Enter the size of subArray: ");
+    // int k = sc.nextInt();
+
+    // double ans = findMaxAverage(nums, k);
+    // System.out.println(ans);
+
+    // 287. Find the Duplicate Number Leetcode
+    
     System.out.println("Enter the size of array: ");
     int n = sc.nextInt();
     
     int [] nums = new int[n];
     nums = takeInputInArray(nums, n, sc);
 
-    System.out.println("Enter the size of subArray: ");
-    int k = sc.nextInt();
-
-    double ans = findMaxAverage(nums, k);
+    int ans = findDuplicate(nums);
     System.out.println(ans);
 
     sc.close();
