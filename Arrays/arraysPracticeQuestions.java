@@ -292,9 +292,9 @@ public class arraysPracticeQuestions {
     }
 
     public static int findDuplicate(int [] nums){
-        int n = nums.length;
-        int[] numsCopy = new int[n];
-        numsCopy = nums;
+        // int n = nums.length;
+        // int[] numsCopy = new int[n];
+        // numsCopy = nums;
 
         
         // sorting method
@@ -342,7 +342,18 @@ public class arraysPracticeQuestions {
         nums[i] = nums[j];
         nums[j] = temp;
     }
-    
+
+    public static int findFirstRepeatingElement(int[] arr) {
+        HashMap<Integer, Integer> elementIndexMap = new HashMap<>();
+        for (int i = 0; i < arr.length; ++i) {
+            if (elementIndexMap.containsKey(arr[i])) {
+                return arr[i];
+            }
+            elementIndexMap.put(arr[i], i);
+        }
+        return -1;
+    }
+
     public static void main(String [] args){
         Scanner sc = new Scanner(System.in);
         // Missing Number
@@ -467,13 +478,24 @@ There are only 3 unique elements, so the 10th most frequent element doesn't exis
 
     // 287. Find the Duplicate Number Leetcode
     
+    // System.out.println("Enter the size of array: ");
+    // int n = sc.nextInt();
+    
+    // int [] nums = new int[n];
+    // nums = takeInputInArray(nums, n, sc);
+
+    // int ans = findDuplicate(nums);
+    // System.out.println(ans);
+
+    // Find first repeating element
+
     System.out.println("Enter the size of array: ");
     int n = sc.nextInt();
     
     int [] nums = new int[n];
     nums = takeInputInArray(nums, n, sc);
-
-    int ans = findDuplicate(nums);
+    
+    int ans = findFirstRepeatingElement(nums);
     System.out.println(ans);
 
     sc.close();
