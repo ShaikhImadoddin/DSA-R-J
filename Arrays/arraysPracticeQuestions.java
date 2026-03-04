@@ -3,9 +3,9 @@ import java.util.Scanner;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.HashMap;
-// import java.util.List;
+import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
+// import java.util.Arrays;
 
 public class arraysPracticeQuestions {
     
@@ -344,15 +344,72 @@ public class arraysPracticeQuestions {
     }
 
     public static int findFirstRepeatingElement(int[] arr) {
-        HashMap<Integer, Integer> elementIndexMap = new HashMap<>();
-        for (int i = 0; i < arr.length; ++i) {
-            if (elementIndexMap.containsKey(arr[i])) {
-                return arr[i];
-            }
-            elementIndexMap.put(arr[i], i);
+
+        /* failed for test case 
+
+        [4, 2, 3, 6, 7, 3, 3, 1, 7, 2, 3, 2, 4, 5, 7]
+
+        output was 3 But answer is 4
+        */
+
+        // HashMap<Integer, Integer> elementIndexMap = new HashMap<>();
+        // for (int i = 0; i < arr.length; ++i) {
+        //     if (elementIndexMap.containsKey(arr[i])) {
+        //         return arr[i];
+        //     }
+        //     elementIndexMap.put(arr[i], i);
+        // }
+        // return -1;
+
+
+        HashMap<Integer, Integer> frequencyMap = new HashMap<>();
+        
+        // Pass 1: Count the occurrences of every element
+        for (int i = 0; i < arr.length; i++) {
+            // If the element isn't in the map yet, default to 0, then add 1.
+            frequencyMap.put(arr[i], frequencyMap.getOrDefault(arr[i], 0) + 1);
         }
-        return -1;
+        
+        // Pass 2: Traverse the array again from the beginning.
+        // The first element we find with a count > 1 is our answer.
+        for (int i = 0; i < arr.length; i++) {
+            if (frequencyMap.get(arr[i]) > 1) {
+                return arr[i]; 
+            }
+        }
+        
+        return -1; // If no repeating element is found
     }
+
+    public static List<Integer> findDisappearedNumbers(int[] nums) {
+        // array size
+        int n = nums.length;
+
+        // declaring list
+        List<Integer> list = new ArrayList<>();
+
+        // linear algorithm for marking elements negative
+        for(int i=0;i<n;i++){
+
+            // Don't forget the -1 offset!
+            int index = Math.abs(nums[i]) - 1; 
+            if(nums[index] > 0)
+                nums[index] *= -1;
+        }
+
+        // identifying missing numbers 
+        for(int i=0;i<n;i++){
+            if(nums[i] > 0){
+                int missingNumber = i+1;
+                list.add(missingNumber);
+            }
+        }
+
+        // return missing numbers
+        return list;
+    }
+
+    
 
     public static void main(String [] args){
         Scanner sc = new Scanner(System.in);
@@ -489,15 +546,28 @@ There are only 3 unique elements, so the 10th most frequent element doesn't exis
 
     // Find first repeating element
 
+    // System.out.println("Enter the size of array: ");
+    // int n = sc.nextInt();
+    
+    // int [] nums = new int[n];
+    // nums = takeInputInArray(nums, n, sc);
+    
+    // int ans = findFirstRepeatingElement(nums);
+    // System.out.println(ans);
+
+    // Missing elements from an array with duplicates
+    // 448. Find All Numbers Disappeared in an Array
+
     System.out.println("Enter the size of array: ");
     int n = sc.nextInt();
     
     int [] nums = new int[n];
     nums = takeInputInArray(nums, n, sc);
     
-    int ans = findFirstRepeatingElement(nums);
+    List<Integer> ans = new ArrayList<>();
+    ans = findDisappearedNumbers(nums);
     System.out.println(ans);
-
+   
     sc.close();
     }
 }
