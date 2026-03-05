@@ -409,6 +409,27 @@ public class arraysPracticeQuestions {
         return list;
     }
 
+    public static List<Integer> commonElements(int[] array1, int[] array2, int[] array3) {
+        List<Integer> result = new ArrayList<>();
+        int i = 0, j = 0, k = 0;
+        while (i < array1.length && j < array2.length && k < array3.length) {
+            if (array1[i] == array2[j] && array2[j] == array3[k]) {
+                if (result.isEmpty() || result.get(result.size() - 1) != array1[i]) {
+                    result.add(array1[i]);
+                }
+                i++; j++; k++;
+            } else if (array1[i] < array2[j]) {
+                i++;
+            } else if (array2[j] < array3[k]) {
+                j++;
+            } else {
+                k++;
+            }
+        }
+        return result;
+    }
+
+
     
 
     public static void main(String [] args){
@@ -558,16 +579,25 @@ There are only 3 unique elements, so the 10th most frequent element doesn't exis
     // Missing elements from an array with duplicates
     // 448. Find All Numbers Disappeared in an Array
 
-    System.out.println("Enter the size of array: ");
-    int n = sc.nextInt();
+    // System.out.println("Enter the size of array: ");
+    // int n = sc.nextInt();
     
-    int [] nums = new int[n];
-    nums = takeInputInArray(nums, n, sc);
+    // int [] nums = new int[n];
+    // nums = takeInputInArray(nums, n, sc);
     
-    List<Integer> ans = new ArrayList<>();
-    ans = findDisappearedNumbers(nums);
-    System.out.println(ans);
+    // List<Integer> ans = new ArrayList<>();
+    // ans = findDisappearedNumbers(nums);
+    // System.out.println(ans);
    
+    // Common Elements In 3 Sorted Array gfg
+    int[] arr_1 = {1, 5, 10, 20, 40, 80};
+    int[] arr_2 = {6, 7, 20, 80, 100};
+    int[] arr_3 = {3, 4, 15, 20, 30, 70, 80, 120};
+
+    List<Integer> ans = new ArrayList<>();
+    ans = commonElements(arr_1, arr_2, arr_3);
+    System.out.println("common elements in 3 arrays are: "+ans);
+
     sc.close();
     }
 }
