@@ -429,8 +429,18 @@ public class arraysPracticeQuestions {
         return result;
     }
 
+    public static int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
 
-    
+        for (int num : nums) {
+            minHeap.offer(num);
+            if (minHeap.size() > k) {
+                minHeap.poll();
+            }
+        }
+
+        return minHeap.peek();
+    }
 
     public static void main(String [] args){
         Scanner sc = new Scanner(System.in);
@@ -590,13 +600,22 @@ There are only 3 unique elements, so the 10th most frequent element doesn't exis
     // System.out.println(ans);
    
     // Common Elements In 3 Sorted Array gfg
-    int[] arr_1 = {1, 5, 10, 20, 40, 80};
-    int[] arr_2 = {6, 7, 20, 80, 100};
-    int[] arr_3 = {3, 4, 15, 20, 30, 70, 80, 120};
 
-    List<Integer> ans = new ArrayList<>();
-    ans = commonElements(arr_1, arr_2, arr_3);
-    System.out.println("common elements in 3 arrays are: "+ans);
+    // int[] arr_1 = {1, 5, 10, 20, 40, 80};
+    // int[] arr_2 = {6, 7, 20, 80, 100};
+    // int[] arr_3 = {3, 4, 15, 20, 30, 70, 80, 120};
+
+    // List<Integer> ans = new ArrayList<>();
+    // ans = commonElements(arr_1, arr_2, arr_3);
+    // System.out.println("common elements in 3 arrays are: "+ans);
+
+    // Kth Largest Element in an Array
+    
+    int[] arr = {3,2,1,5,6,4};
+    int k = 2;
+    int ans = kthMostFrequent(arr, k);
+    System.out.println(ans);
+
 
     sc.close();
     }
