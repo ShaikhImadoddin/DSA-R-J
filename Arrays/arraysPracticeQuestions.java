@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 // import java.util.Arrays;
+import java.util.Collections;
 
 public class arraysPracticeQuestions {
     
@@ -442,6 +443,39 @@ public class arraysPracticeQuestions {
         return minHeap.peek();
     }
 
+    public static ArrayList<Integer> factorial(int n) {
+        // code here
+        ArrayList<Integer> result = new ArrayList<>();
+        // Initialize the result with 1
+        result.add(1);
+        
+        // Multiply numbers from 2 to n
+        for (int i = 2; i <= n; i++) {
+            multiply(result, i);
+        }
+        
+        // Multiply store in reverse order so we need to reverse it
+        Collections.reverse(result);
+        return result;
+    }
+    
+    public static void multiply(ArrayList<Integer> res, int x) {
+        int carry = 0;
+
+        // multiply x with every digit in res
+        for (int i = 0; i < res.size(); i++) {
+            int prod = res.get(i) * x + carry;
+            res.set(i, prod % 10); // Store the last digit
+            carry = prod / 10;     // Carry over the rest
+        }
+
+        // If carry is left add it in list
+        while (carry != 0) {
+            res.add(carry % 10);
+            carry = carry / 10;
+        }
+    }
+
     public static void main(String [] args){
         Scanner sc = new Scanner(System.in);
         // Missing Number
@@ -611,11 +645,25 @@ There are only 3 unique elements, so the 10th most frequent element doesn't exis
 
     // Kth Largest Element in an Array
     
-    int[] arr = {3,2,1,5,6,4};
-    int k = 2;
-    int ans = kthMostFrequent(arr, k);
-    System.out.println(ans);
-
+    // int[] arr = {3,2,1,5,6,4};
+    // int k = 2;
+    // int ans = kthMostFrequent(arr, k);
+    // System.out.println(ans);
+    
+    // Factorial of large number 
+    System.out.print("Enter an integer n: ");
+        if (sc.hasNextInt()) {
+            int n = sc.nextInt();
+            
+            // Calling the static method from Solution class
+            ArrayList<Integer> result = factorial(n);
+            
+            // Printing the output in the required list format
+            System.out.println("Factorial of " + n + " is:");
+            System.out.println(result);
+        } else {
+            System.out.println("Please enter a valid integer.");
+        }
 
     sc.close();
     }
