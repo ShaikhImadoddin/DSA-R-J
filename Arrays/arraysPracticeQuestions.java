@@ -5,6 +5,7 @@ import java.util.PriorityQueue;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 // import java.util.Arrays;
 import java.util.Collections;
 
@@ -476,6 +477,20 @@ public class arraysPracticeQuestions {
         }
     }
 
+    public static List<Integer> addTwoNumbers(List<Integer> nums1, List<Integer> nums2) {
+        List<Integer> result = new ArrayList<>();
+        int carry = 0;
+        int n1 = nums1.size(), n2 = nums2.size();
+        for (int i = 0; i < n1 || i < n2 || carry != 0; ++i) {
+            int sum = carry;
+            if (i < n1) sum += nums1.get(i);
+            if (i < n2) sum += nums2.get(i);
+            result.add(sum % 10);
+            carry = sum / 10;
+        }
+        return result;
+    }
+
     public static void main(String [] args){
         Scanner sc = new Scanner(System.in);
         // Missing Number
@@ -651,19 +666,43 @@ There are only 3 unique elements, so the 10th most frequent element doesn't exis
     // System.out.println(ans);
     
     // Factorial of large number 
-    System.out.print("Enter an integer n: ");
-        if (sc.hasNextInt()) {
-            int n = sc.nextInt();
+    
+    // System.out.print("Enter an integer n: ");
+    //     if (sc.hasNextInt()) {
+    //         int n = sc.nextInt();
             
-            // Calling the static method from Solution class
-            ArrayList<Integer> result = factorial(n);
+    //         // Calling the static method from Solution class
+    //         ArrayList<Integer> result = factorial(n);
             
-            // Printing the output in the required list format
-            System.out.println("Factorial of " + n + " is:");
-            System.out.println(result);
-        } else {
-            System.out.println("Please enter a valid integer.");
-        }
+    //         // Printing the output in the required list format
+    //         System.out.println("Factorial of " + n + " is:");
+    //         System.out.println(result);
+    //     } else {
+    //         System.out.println("Please enter a valid integer.");
+    //     }
+
+    // Add Two Numbers Represented By Two Arrays
+
+    /*
+    You are given two non-empty arrays, nums1 and nums2, representing two non-negative integers. The digits are stored in reverse order, and each of their elements contains a single digit. Your task is to add the two numbers and return the sum as an array in the same digit-reversed format.
+
+        Example 1:
+        Input:
+
+        nums1 = [2, 4, 3]
+        nums2 = [5, 6, 4]
+        Output:
+
+        [7, 0, 8]
+        Explaination:
+        The number represented by nums1 is 342. The number represented by nums2 is 465. 342+465=807. The sum, 807, in reverse order is [7,0,8].
+    */
+
+    List<Integer> nums1 = Arrays.asList(2, 4, 3);
+    List<Integer> nums2 = Arrays.asList(5, 6, 4); 
+        
+    List<Integer> ans = addTwoNumbers(nums1, nums2);
+    System.out.println(ans);
 
     sc.close();
     }
