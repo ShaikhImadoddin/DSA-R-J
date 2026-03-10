@@ -491,6 +491,20 @@ public class arraysPracticeQuestions {
         return result;
     }
 
+    public static int findTheKthSmallest(int[] arr,int k){
+        PriorityQueue<Integer> Que = new PriorityQueue<>();
+
+        for (int a:arr){
+            Que.add(a);
+        }
+
+        for(int i=0;i<k-1;i++){
+            Que.poll();
+        }
+
+        return Que.poll();
+    }
+
     public static void main(String [] args){
         Scanner sc = new Scanner(System.in);
         // Missing Number
@@ -698,10 +712,17 @@ There are only 3 unique elements, so the 10th most frequent element doesn't exis
         The number represented by nums1 is 342. The number represented by nums2 is 465. 342+465=807. The sum, 807, in reverse order is [7,0,8].
     */
 
-    List<Integer> nums1 = Arrays.asList(2, 4, 3);
-    List<Integer> nums2 = Arrays.asList(5, 6, 4); 
+    // List<Integer> nums1 = Arrays.asList(2, 4, 3);
+    // List<Integer> nums2 = Arrays.asList(5, 6, 4); 
         
-    List<Integer> ans = addTwoNumbers(nums1, nums2);
+    // List<Integer> ans = addTwoNumbers(nums1, nums2);
+    // System.out.println(ans);
+
+    // Find the kth smallest element
+
+    int[] arr = {3,2,1,5,6,4};
+    int k = 2;
+    int ans = findTheKthSmallest(arr, k);
     System.out.println(ans);
 
     sc.close();
