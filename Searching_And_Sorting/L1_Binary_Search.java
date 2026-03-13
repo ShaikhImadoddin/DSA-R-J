@@ -108,6 +108,26 @@ public class L1_Binary_Search {
         return ans;
     }
 
+    public static int findMissingElementUsingBinarySearch (ArrayList<Integer> nums){
+        int size = nums.size();
+        int s = 0;
+        int e = size-1;
+        int mid = 0;
+        int ans = size;
+        while(s <= e){
+            mid = s + (e-s)/2;
+
+            if(nums.get(mid) == mid)
+                s = mid + 1;
+            else{
+                ans = mid;
+                e = mid - 1;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
 
@@ -143,13 +163,37 @@ public class L1_Binary_Search {
         Output: [3, 4]
         */
 
+        // ArrayList<Integer> nums = new ArrayList<>();
+        // nums = takeInputInArrayList(sc);
+        // System.out.println("Enter the target: ");
+        // int target = sc.nextInt();
+        // ArrayList<Integer> range = searchRange(nums,target);
+        // System.out.println("Range is : " + range);
+
+
+        // Find the missing element in sorted array
+        /*
+        Find the missing element in array 
+
+        Array is sorted in ascending order
+
+        elements in array are from 0 to N;
+
+        example 1
+        nums = [0,1,2,4,5,6,7]
+        n = 7
+        output 3 
+
+        example 2
+        nums = [0,1,2,3,4]
+        n = 5
+        output 5
+        */
         ArrayList<Integer> nums = new ArrayList<>();
         nums = takeInputInArrayList(sc);
-        System.out.println("Enter the target: ");
-        int target = sc.nextInt();
-        ArrayList<Integer> range = searchRange(nums,target);
-        System.out.println("Range is : " + range);
-
+        
+        int missingElement = findMissingElementUsingBinarySearch(nums);
+        System.out.println("Missing element is : "+ missingElement);
         sc.close();
     }
 }
