@@ -189,11 +189,12 @@ public class L1_Binary_Search {
         n = 5
         output 5
         */
+
         ArrayList<Integer> nums = new ArrayList<>();
         nums = takeInputInArrayList(sc);
-        
         int missingElement = findMissingElementUsingBinarySearch(nums);
         System.out.println("Missing element is : "+ missingElement);
+        
         sc.close();
     }
 }
