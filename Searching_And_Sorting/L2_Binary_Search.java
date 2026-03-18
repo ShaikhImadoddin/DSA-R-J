@@ -127,17 +127,15 @@ public class L2_Binary_Search {
 
         int mid = 0;
 
-        if (n==1){
-            return nums.get(0);
-        }
-
-        if(nums.get(0) < nums.get(n-1)){
-            return -1;
-        }
+        // if(nums.get(0) < nums.get(n-1)){
+        //     return -1;
+        // }
 
         while(s <= e){
             mid = s + (e-s)/2;
-
+            if(s == e){
+                return mid;
+            }
            if(mid+1 < n && nums.get(mid) > nums.get(mid+1)){
                 return mid;
            }
@@ -151,6 +149,39 @@ public class L2_Binary_Search {
         }
 
         return -1;
+    }
+
+    public static int binarySearch(int s,int e, ArrayList<Integer> nums, int target){
+        int mid = 0;
+        while( s <= e){
+            mid = s + (e-s)/2;
+
+            if(nums.get(mid) == target){
+                return mid;
+            }
+            else if(nums.get(mid) < target){
+                s = mid + 1;
+            }
+            else{
+                e = mid - 1;
+            }
+        }
+        return -1;
+    }
+
+    public static int search(ArrayList<Integer> nums, int target) {
+        
+        int n  = nums.size();
+
+        int pivotIndex = findPivotIndex(nums);
+
+        if(target > nums.get(0) && target <= nums.get(pivotIndex)){
+            return binarySearch(0, pivotIndex, nums, target);
+        }
+        else{
+            return binarySearch(pivotIndex+1, n-1, nums, target);
+        }
+
     }
 
     public static void main(String[] args){
@@ -249,14 +280,20 @@ public class L2_Binary_Search {
 
         // Find the pivot index in rotated array
 
+        // ArrayList<Integer> nums = new ArrayList<>();
+        // nums = takeInputInArrayList(sc);
+        // int pivot = findPivotIndex(nums);
+        // System.out.println("Pivot index is: "+pivot);
+
+        // Search in rotated sorted array
+
         ArrayList<Integer> nums = new ArrayList<>();
         nums = takeInputInArrayList(sc);
-        int pivot = findPivotIndex(nums);
-        System.out.println("Pivot index is: "+pivot);
-
-
-
-
+        System.out.println("Enter target: ");
+        int target = sc.nextInt();
+        int ans = search(nums, target);
+        System.out.println(ans);
+        
         sc.close();
     }
 }
