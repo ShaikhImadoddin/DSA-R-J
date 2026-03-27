@@ -1,8 +1,14 @@
 package Searching_And_Sorting;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.StringTokenizer;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
 public class L3_Binary_Search {
+
     public static long solution(long dividend, long divisor){
         long s = 0;
         long e = dividend;
@@ -36,7 +42,40 @@ public class L3_Binary_Search {
             return (0-ans);
     }
 
-    public static void main(String[] args) {
+    public static int findElementInNearlySortedArray(ArrayList<Integer> arr, int K){
+        int size = arr.size();
+
+        int s = 0;
+        int e = size-1;
+        int mid = -1;
+
+        while(s <= e){
+
+            mid = s + (e-s)/2;
+
+            if(arr.get(mid) == K){
+                return mid;
+            }
+
+            if(arr.get(mid+1) == K){
+                return mid+1;
+            }
+
+            if(arr.get(mid-1) == K){
+                return mid-1;
+            }
+
+            if(K > arr.get(mid)){
+                s = mid +1;
+            }
+            else{
+                e = mid - 1;
+            }
+        }
+        return mid;
+    }
+
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
 
         // Find Quotient Without Using Division and Modulus Operators
@@ -66,13 +105,66 @@ public class L3_Binary_Search {
 
         int findQuotient(int dividend, int divisor)
         This function returns the integer quotient of dividing dividend by divisor with truncation towards zero.
-         */
-        System.out.println("Enter value of dividend: ");
-        long dividend = sc.nextLong();
-        System.out.println("Enter value of divisor: ");
-        long divisor = sc.nextLong();
-        long ans = findQuotient(dividend, divisor);
-        System.out.println("Ans: "+ ans);
+        */
+
+        // System.out.println("Enter value of dividend: ");
+        // long dividend = sc.nextLong();
+        // System.out.println("Enter value of divisor: ");
+        // long divisor = sc.nextLong();
+        // long ans = findQuotient(dividend, divisor);
+        // System.out.println("Ans: "+ ans);
+
+        // Find an element in nearly sorted array elements can be swapped with adjacent ones
+
+        /*
+        In a nearly sorted array, elements are expected to be in sorted order except that each element can be swapped with its adjacent elements. This means that any element at index i in a sorted array could appear at index i-1, i, or i+1 in a nearly sorted array. Your task is to determine the index of a given target element K within this array. If the element K is not present, return -1.
+
+        Example 1: 
+        n = 5
+        arr = [3, 5, 10, 9, 11]
+        K = 10
+        Output
+        2
+
+        Constraints
+
+        1 ≤ n ≤ 10^4
+        -10^9 ≤ arr[i], K ≤ 10^9
+        n is the number of elements in the array.
+        */
+
+        // Step 1: Initialize BufferedReader to read from System.in
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        // Step 2: Read the first line (n)
+
+        String line1 = br.readLine();
+
+        if(line1 == null || line1.isEmpty())
+            return;
+
+        int n = Integer.parseInt(line1.trim());
+
+        // step 3 : read the second line array and tokenize it
+
+        ArrayList<Integer> arr = new ArrayList<>();
+        String line2 = br.readLine();
+        if (line2 == null) return;
+
+        StringTokenizer st =  new StringTokenizer(line2);
+
+        for (int i = 0; i < n; i++) {
+            arr.add(Integer.parseInt(st.nextToken()));
+        }
+
+        // Step 4: Read the target K
+        String line3 = br.readLine();
+        if(line3 == null || line2.isEmpty()) return;
+        int K = Integer.parseInt(line3.trim());
+
+        // Output the result
+        System.out.println(findElementInNearlySortedArray(arr, K));
 
         sc.close();
     }
