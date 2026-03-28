@@ -3,6 +3,7 @@ package Searching_And_Sorting;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+import java.util.Vector;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
@@ -75,6 +76,30 @@ public class L3_Binary_Search {
         return mid;
     }
 
+    public static int singleNonDuplicate(ArrayList<Integer> nums){
+        int n = nums.size(); // array size
+
+        int s = 0;
+        int e = n-1;
+        int mid = 0;
+
+        while(s <= e){
+            mid = s + (e-s)/2;
+
+            if(nums.get(mid) != nums.get(mid-1) && nums.get(mid) != nums.get(mid+1)){
+                return nums.get(mid);
+            }
+
+            if(mid%2 == 0){
+                s = mid + 1;
+            }
+            else{
+                e = mid - 1;
+            }
+        }
+        return nums.get(mid);
+    }
+
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
 
@@ -133,38 +158,104 @@ public class L3_Binary_Search {
         n is the number of elements in the array.
         */
 
-        // Step 1: Initialize BufferedReader to read from System.in
+        // // Step 1: Initialize BufferedReader to read from System.in
 
+        // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        // // Step 2: Read the first line (n)
+
+        // String line1 = br.readLine();
+
+        // if(line1 == null || line1.isEmpty())
+        //     return;
+
+        // int n = Integer.parseInt(line1.trim());
+
+        // // step 3 : read the second line array and tokenize it
+
+        // ArrayList<Integer> arr = new ArrayList<>();
+        // String line2 = br.readLine();
+        // if (line2 == null) return;
+
+        // StringTokenizer st =  new StringTokenizer(line2);
+
+        // for (int i = 0; i < n; i++) {
+        //     arr.add(Integer.parseInt(st.nextToken()));
+        // }
+
+        // // Step 4: Read the target K
+        // String line3 = br.readLine();
+        // if(line3 == null || line2.isEmpty()) return;
+        // int K = Integer.parseInt(line3.trim());
+
+        // // Output the result
+        // System.out.println(findElementInNearlySortedArray(arr, K));
+
+        // Find Single Non-Duplicate Element using Binary Search
+
+        /*
+        You are given a sorted array consisting of n integers where every element appears exactly twice, except for one element which appears exactly once. Your task is to find this single non-duplicate element in the array. The array is structured in such a way that it guarantees that exactly one element appears once, while every other element appears twice.
+
+        To solve this problem efficiently, you should implement an algorithm with O(log n) runtime complexity.
+
+        Example:
+
+        Input: nums = [1, 1, 2, 3, 3, 4, 4, 8, 8]
+
+        Output: 2
+
+        Explanation: Here, each element appears twice except for 2, which appears only once. Therefore, 2 is the single non-duplicate element in the array.
+
+        Example 2:
+
+        Input: [3,3,7,7,10,11,11]
+
+        Output:10
+
+        Explanation:The unique element in the array is 10.
+
+        Example 3:
+
+        Input: [1,1,2,2,3]
+
+        Output:3
+
+        Explanation:The unique element in the array is 3.
+
+        Constraints:
+
+        The length of the array `n` is odd.
+        1 <= n <= 10000
+        0 <= nums[i] <= 10^5
+        nums must contain exactly one element that appears once.
+        The rest elements appear exactly twice.
+        */
+
+        // Step 1: Initialize BufferedReader to read from System.in
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        // Step 2: Read the first line (n)
-
+        // Step 2: Read the first line (n -> size of array)
         String line1 = br.readLine();
-
-        if(line1 == null || line1.isEmpty())
+        if(line1 == null || line1.trim().isEmpty())
             return;
+        int n = Integer.parseInt(line1);
 
-        int n = Integer.parseInt(line1.trim());
-
-        // step 3 : read the second line array and tokenize it
-
-        ArrayList<Integer> arr = new ArrayList<>();
+        // Step 3: Read the second line (the array), comma-separated
         String line2 = br.readLine();
-        if (line2 == null) return;
+        if(line2 == null || line2.trim().isEmpty())
+            return;
+        // Split the string by commas instead of using StringTokenizer with spaces
+        String[] parts = line2.split(",");
 
-        StringTokenizer st =  new StringTokenizer(line2);
+        ArrayList<Integer> nums = new ArrayList<>();
 
-        for (int i = 0; i < n; i++) {
-            arr.add(Integer.parseInt(st.nextToken()));
+        for(int i=0;i<n;i++){
+            nums.add(Integer.parseInt(parts[i].trim()));
         }
 
-        // Step 4: Read the target K
-        String line3 = br.readLine();
-        if(line3 == null || line2.isEmpty()) return;
-        int K = Integer.parseInt(line3.trim());
+        System.out.println(singleNonDuplicate(nums));
 
-        // Output the result
-        System.out.println(findElementInNearlySortedArray(arr, K));
+
 
         sc.close();
     }
