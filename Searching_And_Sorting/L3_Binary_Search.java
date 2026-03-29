@@ -86,16 +86,42 @@ public class L3_Binary_Search {
         while(s <= e){
             mid = s + (e-s)/2;
 
-            if(nums.get(mid) != nums.get(mid-1) && nums.get(mid) != nums.get(mid+1)){
-                return nums.get(mid);
+            if(s == e)
+                return nums.get(s);
+
+            int currentValue = nums.get(mid);
+
+            int leftValue = -1;
+            if(mid-1 >= 0)
+                leftValue = nums.get(mid-1);
+
+            int rightValue = -1;
+            if(mid+1 < n)
+                rightValue = nums.get(mid+1);
+            
+
+            if(currentValue != leftValue && currentValue != rightValue)
+                return currentValue;
+            
+            if(currentValue == leftValue && currentValue != rightValue){
+                if((mid-1) % 2 == 1){
+                    e = mid - 1;
+                }
+                else{
+                    s = mid + 1;
+                }
             }
 
-            if(mid%2 == 0){
-                s = mid + 1;
+            if(currentValue != leftValue && currentValue == rightValue){
+                if((mid%2) == 1){
+                    e = mid - 1;
+                }
+                else{
+                    s = mid + 1;
+                }
             }
-            else{
-                e = mid - 1;
-            }
+
+
         }
         return nums.get(mid);
     }
