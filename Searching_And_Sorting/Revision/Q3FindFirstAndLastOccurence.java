@@ -2,7 +2,9 @@ package Searching_And_Sorting.Revision;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 import java.io.BufferedReader;
+import java.util.Arrays; // Added to print the array properly
 
 // Find First and Last Occurrence of an Element in a Sorted Array
 
@@ -27,10 +29,49 @@ Output:
 */
 
 public class Q3FindFirstAndLastOccurence {
+    // Helper function
+    public static String nextDataLine(BufferedReader br) throws IOException{
+        String line = br.readLine();
+
+        while(line != null && line.trim().isEmpty()){
+           line = br.readLine();
+        }
+        return line;
+    }
+
+    public static int[] findFirstAndLastOccurence(int[] nums,int target){
+        int[] pair = new int[2];
+
+
+        int firstIndex = Q3AFindFirstOccurence.findFirstOccurence(nums, target);
+        int lastIndex =  Q3BFindLastOccurence.findLastOccurence(nums, target);
+
+        pair[0] = firstIndex;
+        pair[1] = lastIndex;
+
+        return pair;
+    }
     
     public static void main(String [] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+        // input array
+        String line1 = nextDataLine(br);
+        if(line1 == null) return;
+        StringTokenizer st = new StringTokenizer(line1);
+        int n = st.countTokens();
+        int [] nums = new int[n];
+        for(int i=0;i<n;i++){
+            nums[i] = Integer.parseInt(st.nextToken().trim());
+        }
+
+        // target
+        String line2 = nextDataLine(br);
+        if(line2 == null) return;
+        int target = Integer.parseInt(line2.trim());
+
+        int [] arr = findFirstAndLastOccurence(nums,target);
+        System.out.println(Arrays.toString(arr));
 
         br.close();
     }   
