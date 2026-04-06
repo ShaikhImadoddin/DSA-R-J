@@ -88,7 +88,6 @@ public class Q7FindThePivotIndexOfARotatedArray {
             if (nums[lo] <= nums[mid]) {
                 lo = mid + 1;
             } else {
-                
                 hi = mid - 1;
             }
         }

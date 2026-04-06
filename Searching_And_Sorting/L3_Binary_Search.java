@@ -2,8 +2,8 @@ package Searching_And_Sorting;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.StringTokenizer;
-import java.util.Vector;
+// import java.util.StringTokenizer;
+// import java.util.Vector;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
@@ -128,6 +128,7 @@ public class L3_Binary_Search {
 
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
+        sc.close();
 
         // Find Quotient Without Using Division and Modulus Operators
 
@@ -282,7 +283,7 @@ public class L3_Binary_Search {
         System.out.println(singleNonDuplicate(nums));
 
 
-
+        br.close();
         sc.close();
     }
 }
