@@ -67,32 +67,30 @@ public class Q7FindThePivotIndexOfARotatedArray {
         if (n == 0 || nums[0] <= nums[n - 1]) {
             return -1;
         }
+        
+        int s = 0;
+        int e = n-1;
+        int mid = -1;
 
-        int lo = 0;
-        int hi = n - 1;
+        while(s <= e){
+            mid = s + (e-s)/2;
 
-        while (lo <= hi) {
-            int mid = lo + (hi - lo) / 2;
-
-            // Check if mid is the pivot (highest element)
-            if (mid < hi && nums[mid] > nums[mid + 1]) {
+            if(mid < e && nums[mid] > nums[mid + 1]){
                 return mid;
             }
-            
-            // Check if mid - 1 is the pivot
-            if (mid > lo && nums[mid] < nums[mid - 1]) {
-                return mid - 1;
+
+            if(mid > s && nums[mid] < nums[mid - 1]){
+                return mid-1;
             }
 
-    
-            if (nums[lo] <= nums[mid]) {
-                lo = mid + 1;
-            } else {
-                hi = mid - 1;
+            if(nums[s] <= nums[mid]){
+                s = mid + 1;
+            }
+            else{
+                e = mid - 1;
             }
         }
-
-        return -1;
+        return mid;
     }
 
 

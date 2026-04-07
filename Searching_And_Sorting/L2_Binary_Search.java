@@ -285,7 +285,7 @@ public class L2_Binary_Search {
         // int pivot = findPivotIndex(nums);
         // System.out.println("Pivot index is: "+pivot);
 
-        // Search in rotated sorted array
+        // Search in rotated sorted array leetcode 33
 
         ArrayList<Integer> nums = new ArrayList<>();
         nums = takeInputInArrayList(sc);
