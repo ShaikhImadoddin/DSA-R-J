@@ -32,7 +32,7 @@ import java.io.InputStreamReader;
         int findQuotient(int dividend, int divisor)
         This function returns the integer quotient of dividing dividend by divisor with truncation towards zero.
         */
-public class Q9_FindQuotient{
+public class Q9FindQuotient{
 
     public static String nextDataLine(BufferedReader br) throws IOException{
         String line = br.readLine();
