@@ -105,6 +105,5 @@ public class Q12KDiffPairsInArray {
         int K = Integer.parseInt(kLine.trim());
 
         System.out.println(findPairs(nums,K));
-
     }   
 }
