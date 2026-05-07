@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+// Link
+// https://www.geeksforgeeks.org/problems/allocate-minimum-number-of-pages0937/1
+
 public class Q16AllocateMinimumPages {
 
     // helper function
