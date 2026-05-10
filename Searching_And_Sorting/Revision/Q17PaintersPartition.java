@@ -105,10 +105,5 @@ public class Q17PaintersPartition {
         catch(NumberFormatException e){
             System.out.println("Invalid Input");
         }
-
-        
-
-        
-
     }
 }
