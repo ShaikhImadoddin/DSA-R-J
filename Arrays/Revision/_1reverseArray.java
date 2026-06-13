@@ -22,7 +22,7 @@ public class _1reverseArray {
         return line.trim();
     }
 
-    public static int[] reverseArray(int n,int[] arr){
+    public static int[] reverseArray(int[] arr){
         int[] reversedArray = Arrays.copyOf(arr, n);
 
         int i=0;
